@@ -33,9 +33,24 @@ void shellSort(int vetor[], int tamanho)
     }
 }
 
+void printArray(int vetor[], int tamanho)
+{
+    int i = 0;
+    for (i = 0; i < tamanho; i++)
+    {
+        printf("%i ", vetor[i]);
+    }
+    printf("\n");
+}
+
 int main()
 {
     int v[] = {5, 4, 7, 8, 3, 2, 9, 1};
+    printf("Array não ordenado:");
+    printArray(v, 8);
+    printf("Ordenando...\n");
     shellSort(v, 8);
+    printf("Array ordenado:");
+    printArray(v, 8);
     return 0;
 }
