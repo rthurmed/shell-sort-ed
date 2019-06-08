@@ -1,5 +1,18 @@
 #include <stdio.h>
 
+#define ARRAY_SIZE 8
+
+void printArray(int vetor[], int tamanho, int indexA, int indexB)
+{
+    int i = 0;
+    for (i = 0; i < tamanho; i++)
+    {
+        if(i == indexA || i == indexB) printf("[%i] ", vetor[i]);
+        else printf("%i ", vetor[i]);
+    }
+    printf("\n");
+}
+
 void shellSort(int vetor[], int tamanho)
 {
     int h;      // Incremento de shell
@@ -17,16 +30,22 @@ void shellSort(int vetor[], int tamanho)
     // Loop de alteração do incremento de shell
     while (h > 0)
     {
+        printf("\nh: %i\narray:\t", h);
+        printArray(vetor, tamanho, -1, -1);
         // Avança o indice da direita
         for (i = h; i < tamanho; i++)
         {
             j = i - h;
+            printf("\t");
+            printArray(vetor, tamanho, j, i);
             // Compara as duas posições
             if (vetor[j] > vetor[i])
             {
+                printf("%i > %i\t", vetor[j], vetor[i]);
                 aux = vetor[i];
                 vetor[i] = vetor[j];
                 vetor[j] = aux;
+                printArray(vetor, tamanho, j, i);
             }
         }
         // Atualiza o valor do incremento de shell
@@ -34,24 +53,14 @@ void shellSort(int vetor[], int tamanho)
     }
 }
 
-void printArray(int vetor[], int tamanho)
-{
-    int i = 0;
-    for (i = 0; i < tamanho; i++)
-    {
-        printf("%i ", vetor[i]);
-    }
-    printf("\n");
-}
-
 int main()
 {
-    int v[] = {5, 4, 7, 8, 3, 2, 9, 1};
+    int v[ARRAY_SIZE] = {5, 4, 7, 8, 3, 2, 9, 1};
     printf("Array não ordenado: ");
-    printArray(v, 8);
+    printArray(v, ARRAY_SIZE, -1, -1);
     printf("Ordenando...\n");
-    shellSort(v, 8);
-    printf("Array ordenado: ");
-    printArray(v, 8);
+    shellSort(v, ARRAY_SIZE);
+    printf("\nArray ordenado: ");
+    printArray(v, ARRAY_SIZE, -1, -1);
     return 0;
 }
