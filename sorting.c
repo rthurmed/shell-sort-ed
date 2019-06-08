@@ -2,7 +2,35 @@
 
 void shellSort(int vetor[], int tamanho)
 {
-    
+    int h;      // Incremento de shell
+    int i;      // Indice da esquerda
+    int j;      // Indice da direita
+    int aux;    // Variável auxiliar
+
+    // Cálculo do incremento de shell
+    h = 1;
+    while (h < tamanho)
+    {
+        h = 3 * h + 1;
+    }
+
+    // Loop de alteração do incremento de shell
+    while (h > 0)
+    {
+        for (i = h; i < tamanho; i++)
+        {
+            for (j = 0; j < tamanho - h; j++)
+            {
+                if (vetor[i] < vetor[j])
+                {
+                    aux = vetor[i];
+                    vetor[i] = vetor[j];
+                    vetor[j] = aux;
+                }
+            }
+        }
+        h = h / 3;
+    }
 }
 
 int main()
