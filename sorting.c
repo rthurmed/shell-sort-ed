@@ -3,8 +3,8 @@
 void shellSort(int vetor[], int tamanho)
 {
     int h;      // Incremento de shell
-    int i;      // Indice da esquerda
-    int j;      // Indice da direita
+    int i;      // Indice da direita
+    int j;      // Indice da esquerda
     int aux;    // Variável auxiliar
 
     // Cálculo do incremento de shell
@@ -17,18 +17,19 @@ void shellSort(int vetor[], int tamanho)
     // Loop de alteração do incremento de shell
     while (h > 0)
     {
+        // Avança o indice da direita
         for (i = h; i < tamanho; i++)
         {
-            for (j = 0; j < tamanho - h; j++)
+            j = i - h;
+            // Compara as duas posições
+            if (vetor[j] > vetor[i])
             {
-                if (vetor[i] < vetor[j])
-                {
-                    aux = vetor[i];
-                    vetor[i] = vetor[j];
-                    vetor[j] = aux;
-                }
+                aux = vetor[i];
+                vetor[i] = vetor[j];
+                vetor[j] = aux;
             }
         }
+        // Atualiza o valor do incremento de shell
         h = h / 3;
     }
 }
@@ -46,11 +47,11 @@ void printArray(int vetor[], int tamanho)
 int main()
 {
     int v[] = {5, 4, 7, 8, 3, 2, 9, 1};
-    printf("Array não ordenado:");
+    printf("Array não ordenado: ");
     printArray(v, 8);
     printf("Ordenando...\n");
     shellSort(v, 8);
-    printf("Array ordenado:");
+    printf("Array ordenado: ");
     printArray(v, 8);
     return 0;
 }
