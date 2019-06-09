@@ -7,22 +7,24 @@ void printArray(int vetor[], int tamanho, int indexA, int indexB)
     int i = 0;
     for (i = 0; i < tamanho; i++)
     {
-        if(i == indexA || i == indexB) printf("[%i] ", vetor[i]);
-        else printf("%i ", vetor[i]);
+        if (i == indexA || i == indexB)
+            printf("[%i] ", vetor[i]);
+        else
+            printf(" %i  ", vetor[i]);
     }
     printf("\n");
 }
 
 void shellSort(int vetor[], int tamanho)
 {
-    int h;      // Incremento de shell
-    int i;      // Indice da direita
-    int j;      // Indice da esquerda
-    int aux;    // Variável auxiliar
+    int h;   // Incremento de shell
+    int i;   // Indice do vetor
+    int j;   // Indica a nova posição do valor comparado
+    int aux; // Variável auxiliar
 
     // Cálculo do incremento de shell
     h = 1;
-    while (h < tamanho)
+    while (h <= tamanho / 3)
     {
         h = 3 * h + 1;
     }
@@ -35,18 +37,22 @@ void shellSort(int vetor[], int tamanho)
         // Avança o indice da direita
         for (i = h; i < tamanho; i++)
         {
-            j = i - h;
+            aux = vetor[i];
+            j = i; // j parte da posição i
             printf("\t");
-            printArray(vetor, tamanho, j, i);
-            // Compara as duas posições
-            if (vetor[j] > vetor[i])
+            printArray(vetor, tamanho, i - h, i);
+            // Fica em loop até encontrar a posição adequada
+            while (j > h - 1               // j - h precisa estar no vetor
+                   && vetor[j - h] >= aux) // j - h precisa ser menor que o valor a ser movido
             {
-                printf("%i > %i\t", vetor[j], vetor[i]);
-                aux = vetor[i];
-                vetor[i] = vetor[j];
-                vetor[j] = aux;
+                printf("%i > %i\t", vetor[j - h], aux);
+                vetor[j] = vetor[j - h]; // Copia o valor anterior pro indice candidato
+                j = j - h;               // Move o indice candidato h posição para trás
+                // vetor[j] = aux; // DEBUG
                 printArray(vetor, tamanho, j, i);
             }
+            // Atribui o valor à nova posição
+            vetor[j] = aux;
         }
         // Atualiza o valor do incremento de shell
         h = h / 3;
