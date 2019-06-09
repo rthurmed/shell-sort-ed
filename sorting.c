@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#define ARRAY_SIZE 8
+#define MAX_ARRAY_SIZE 50
 
 void printArray(int vetor[], int tamanho, int indexA, int indexB)
 {
@@ -61,12 +61,20 @@ void shellSort(int vetor[], int tamanho)
 
 int main()
 {
-    int v[ARRAY_SIZE] = {5, 4, 7, 8, 3, 2, 9, 1};
+    // int array[8] = {5, 4, 7, 8, 3, 2, 9, 1}, t = 8;
+    int array[MAX_ARRAY_SIZE], t = 0, in = 0;
+    printf("Insira números para o array a ser ordenado: (-1 para terminar)\n");
+    scanf("%i", &in);
+    while (t < MAX_ARRAY_SIZE && in >= 0) {
+        array[t] = in;
+        t++;
+        scanf("%i", &in);
+    }
     printf("Array não ordenado: ");
-    printArray(v, ARRAY_SIZE, -1, -1);
+    printArray(array, t, -1, -1);
     printf("Ordenando...\n");
-    shellSort(v, ARRAY_SIZE);
+    shellSort(array, t);
     printf("\nArray ordenado: ");
-    printArray(v, ARRAY_SIZE, -1, -1);
+    printArray(array, t, -1, -1);
     return 0;
 }
